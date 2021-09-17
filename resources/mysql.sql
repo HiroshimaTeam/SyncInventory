@@ -5,9 +5,9 @@
 CREATE TABLE IF NOT EXISTS SyncPLayer
 (
     xuid     TEXT,
-    inv      JSON,
-    armor    JSON,
-    ender    JSON,
+    inv      LONGTEXT,
+    armor    LONGTEXT,
+    ender    LONGTEXT,
     xpLvl    INT,
     xpP      FLOAT
 );
