@@ -6,6 +6,7 @@ namespace Tarzan;
 use pocketmine\plugin\PluginBase;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
+use src\Tarzan\Utils\AntiDupli;
 use Tarzan\Api\SyncPlayerAPI;
 use Tarzan\Event\PlayerListenner;
 
@@ -18,12 +19,13 @@ class Main extends PluginBase{
 
     public function onLoad()
     {
-        $this->saveResource("config.yml");
         self::$instance = $this;
+        new AntiDupli;
+        $this->saveResource("config.yml");
         self::$database = libasynql::create($this, $this->getConfig()->get("database"), [
             "mysql" => "mysql.sql"
         ]);
-        self::$infoplayers = new SyncPlayerAPI();
+        self::$infoplayers = new SyncPlayerAPI;
 
     }
 
@@ -32,7 +34,7 @@ class Main extends PluginBase{
     {
         self::$database->executeGeneric('SyncPLayer.init');
         self::$database->waitAll();
-        $this->getServer()->getPluginManager()->registerEvents(new PlayerListenner(),$this);
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerListenner,$this);
     }
 
     public function onDisable()
