@@ -73,7 +73,9 @@ class PlayerListenner implements Listener
      */
     public function onQuit(PlayerQuitEvent $event)
     {
-        Main::getSyncPlayerAPI()->registerInv($event->getPlayer());
+        $player = $event->getPlayer();
+        Main::getSyncPlayerAPI()->registerInv($player);
+        AntiDupli::getInstance()->removeAntiDropPlayer($player->getXuid());
     }
 
     /**
