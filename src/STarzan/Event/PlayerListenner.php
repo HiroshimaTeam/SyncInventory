@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tarzan\Event;
+namespace STarzan\Event;
 
 
 use pocketmine\event\inventory\InventoryOpenEvent;
@@ -13,8 +13,8 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\Player;
-use src\Tarzan\Utils\AntiDupli;
-use Tarzan\Main;
+use STarzan\Utils\AntiDupli;
+use STarzan\Main;
 
 class PlayerListenner implements Listener
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Tarzan\Utils;
+namespace STarzan\Utils;
 
 class AntiDupli
 {

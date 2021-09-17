@@ -1,14 +1,14 @@
 <?php
 
-namespace Tarzan;
+namespace STarzan;
 
 
 use pocketmine\plugin\PluginBase;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
-use src\Tarzan\Utils\AntiDupli;
-use Tarzan\Api\SyncPlayerAPI;
-use Tarzan\Event\PlayerListenner;
+use STarzan\Utils\AntiDupli;
+use STarzan\Api\SyncPlayerAPI;
+use STarzan\Event\PlayerListenner;
 
 class Main extends PluginBase{
 
@@ -19,9 +19,9 @@ class Main extends PluginBase{
 
     public function onLoad()
     {
+        $this->saveResource("config.yml");
         self::$instance = $this;
         new AntiDupli;
-        $this->saveResource("config.yml");
         self::$database = libasynql::create($this, $this->getConfig()->get("database"), [
             "mysql" => "mysql.sql"
         ]);

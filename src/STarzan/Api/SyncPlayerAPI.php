@@ -1,11 +1,11 @@
 <?php
-namespace Tarzan\Api;
+namespace STarzan\Api;
 
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\utils\Config;
-use src\Tarzan\Utils\AntiDupli;
-use Tarzan\Main;
+use STarzan\Utils\AntiDupli;
+use STarzan\Main;
 
 class SyncPlayerAPI
 {
