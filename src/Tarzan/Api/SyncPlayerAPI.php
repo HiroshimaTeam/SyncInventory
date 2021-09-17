@@ -4,6 +4,7 @@ namespace Tarzan\Api;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\utils\Config;
+use src\Tarzan\Utils\AntiDupli;
 use Tarzan\Main;
 
 class SyncPlayerAPI
@@ -51,7 +52,7 @@ class SyncPlayerAPI
      */
     public function SyncPlayer(Player $player): void
     {
-        Main::getDatabase()->executeSelect("SyncPLayer.save", ["xuid" => $player->getXuid()], function (array $rows) use ($player) {
+        Main::getDatabase()->executeSelect("SyncPLayer.save", ["xuid" => $xuid = $player->getXuid()], function (array $rows) use ($player,$xuid) {
             if (count($rows) === 0) {
                 return;
             }
@@ -68,43 +69,45 @@ class SyncPlayerAPI
                 $xp_progress = $result["xpP"];
                 break;
             }
-            if ($inv_db !== null) {
-                $inv = $player->getInventory();
-                if ($inv !== null) {
-                    $inv->clearAll();
-                    foreach (json_decode($inv_db, true) as $slot => $item) {
-                        $inv->setItem($slot,  Item::jsonDeserialize($item));
+            if ($player->isConnected()) {
+                if ($inv_db !== null) {
+                    $inv = $player->getInventory();
+                    if ($inv !== null) {
+                        $inv->clearAll();
+                        foreach (json_decode($inv_db, true) as $slot => $item) {
+                            $inv->setItem($slot, Item::jsonDeserialize($item));
+                        }
                     }
                 }
-            }
 
-            if ($inv_armor !== null) {
-                $armor = $player->getArmorInventory();
-                if ($armor !== null) {
-                    $armor->clearAll();
-                    foreach (json_decode($inv_armor, true) as $slot => $item) {
-                        $armor->setItem($slot,  Item::jsonDeserialize($item));
+                if ($inv_armor !== null) {
+                    $armor = $player->getArmorInventory();
+                    if ($armor !== null) {
+                        $armor->clearAll();
+                        foreach (json_decode($inv_armor, true) as $slot => $item) {
+                            $armor->setItem($slot, Item::jsonDeserialize($item));
+                        }
                     }
                 }
-            }
 
-            if ($inv_ender !== null) {
-                $ender = $player->getEnderChestInventory();
-                if ($ender !== null) {
-                    $ender->clearAll();
-                    foreach (json_decode($inv_ender, true) as $slot => $item) {
-                        $ender->setItem($slot,  Item::jsonDeserialize($item));
+                if ($inv_ender !== null) {
+                    $ender = $player->getEnderChestInventory();
+                    if ($ender !== null) {
+                        $ender->clearAll();
+                        foreach (json_decode($inv_ender, true) as $slot => $item) {
+                            $ender->setItem($slot, Item::jsonDeserialize($item));
+                        }
                     }
                 }
-            }
 
-            if ($xp_lvl !== null) {
-                $player->setXpLevel((int)$xp_lvl);
+                if ($xp_lvl !== null) {
+                    $player->setXpLevel((int)$xp_lvl);
+                }
+                if ($xp_progress !== null) {
+                    $player->setXpProgress((float)$xp_progress);
+                }
+                AntiDupli::getInstance()->setAntiDropPlayer($xuid,true);
             }
-            if ($xp_progress !== null) {
-                $player->setXpProgress((float)$xp_progress);
-            }
-
         });
     }
 
