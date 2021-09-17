@@ -1,5 +1,5 @@
 name: SyncPlayer
 author: SenseiTarzan
 version: 1.0
-main: Tarzan\Main
+main: STarzan\Main
 api: 3.21.0

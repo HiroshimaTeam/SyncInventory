@@ -2,8 +2,6 @@
 
 namespace src\Tarzan\Utils;
 
-use Tarzan\Event\PlayerListenner;
-
 class AntiDupli
 {
 
