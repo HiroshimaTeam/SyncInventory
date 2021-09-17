@@ -1,6 +1,6 @@
 database:
   ##Le type de base de données. "sqlite" et "mysql" sont supportés.
-  type: sqlite
+  type: mysql
   ##Modifiez ces paramètres uniquement si vous choisissez "sqlite".
   mysql:
     host: 127.0.0.1
@@ -11,9 +11,4 @@ database:
     ##Le nombre maximum de requêtes SQL simultanées
     ##Recommandé : 1 pour sqlite, 2 pour MySQL. Vous pouvez augmenter cette valeur si votre connexion MySQL est très lente.
 
-  sqlite:
-    ##Le nom du fichier de la base de données dans le dossier de données du plugin.
-    ##Vous pouvez également mettre un chemin absolu ici.
-    file: data.sqlite
-    ##Modifiez ces paramètres uniquement si vous choisissez "mysql".
-  worker-limit: 1
+  worker-limit: 2
