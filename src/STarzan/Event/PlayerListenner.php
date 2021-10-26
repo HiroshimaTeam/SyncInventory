@@ -47,16 +47,6 @@ class PlayerListenner implements Listener
     }
 
     /**
-     * Permet d'enlever un bug de duplication
-     * @param InventoryOpenEvent $event
-     */
-    public function onOpenInventory(InventoryOpenEvent $event){
-        if (!AntiDupli::getInstance()->getAntiDropPlayer($event->getPlayer()->getXuid())){
-            $event->setCancelled();
-        }
-    }
-
-    /**
      * Permet d'arrrete la transaction de item avant que l'inventaire soit mis
      * @param InventoryTransactionEvent $event
      */
