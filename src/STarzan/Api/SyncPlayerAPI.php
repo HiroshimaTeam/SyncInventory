@@ -70,7 +70,6 @@ class SyncPlayerAPI
                 $xp_progress = $result["xpP"];
                 break;
             }
-            if ($player->isConnected()) {
                 if ($inv_db !== null) {
                     $inv = $player->getInventory();
                     if ($inv !== null) {
@@ -108,7 +107,7 @@ class SyncPlayerAPI
                     $player->setXpProgress((float)$xp_progress);
                 }
                 AntiDupli::getInstance()->setAntiDropPlayer($xuid,true);
-            }
+            
         });
     }
 
