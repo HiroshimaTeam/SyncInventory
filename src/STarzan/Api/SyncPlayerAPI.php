@@ -54,6 +54,7 @@ class SyncPlayerAPI
     {
         Main::getDatabase()->executeSelect("SyncPLayer.save", ["xuid" => $xuid = $player->getXuid()], function (array $rows) use ($player,$xuid) {
             if (count($rows) === 0) {
+                AntiDupli::getInstance()->setAntiDropPlayer($xuid,true);
                 return;
             }
             $xp_lvl = null;
